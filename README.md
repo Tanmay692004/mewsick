@@ -19,7 +19,7 @@ An open-source **React Native (Expo)** Android utility that helps you leave musi
 - **Expo** + **Expo Router** (navigation and app runtime)
 - **NativeWind / Tailwind CSS** (styling system)
 - **Expo FileSystem** (local file discovery and storage operations)
-- **YouTube Data API** (playlist and metadata integration only; not used for audio stream delivery)
+- **YouTube Data API** (playlist + metadata integration; audio stream URL resolution is handled by a separate native resolver pipeline)
 
 ## 🧠 How It Works
 
@@ -28,14 +28,14 @@ The app builds a local index of audio files (name/artist heuristics + metadata w
 Only items not found in the local index are marked as **missing**, preventing duplicate downloads and saving bandwidth.
 
 ### 2) Native Pass-through
-`mewsick` uses YouTube Data API for playlist/track metadata, then resolves playable audio streams via a native extraction component (a platform-native resolver layer in the app architecture, not a third-party scraping site). Instead of forcing 320kbps MP3 transcoding, it fetches native stream/container formats directly (such as `.m4a` or `.webm`) when available.  
+`mewsick` uses YouTube Data API for playlist/track metadata, then resolves playable audio streams via a native extraction component (planned as a platform-native resolver layer in the app architecture, not a third-party scraping site). Instead of forcing 320kbps MP3 transcoding, it fetches native stream/container formats directly (such as `.m4a` or `.webm`) when available.  
 This pass-through approach:
 
 - Preserves source fidelity
 - Avoids unnecessary transcoding artifacts
 - Reduces processing time
 - Often uses less storage than forced re-encoding workflows
-- Falls back to the next best available native container/bitrate when preferred formats are unavailable (still no forced MP3 transcode)
+- Falls back to the next best available container/bitrate when preferred native formats are unavailable, while avoiding forced MP3 transcoding where possible
 
 ## 📦 Installation & Local Development
 
