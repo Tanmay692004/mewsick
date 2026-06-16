@@ -10,7 +10,7 @@ An open-source **React Native (Expo)** Android utility that helps you leave musi
 - 🔍 **Smart diffing** between your local library and a selected online playlist.
 - ⬇️ **Background downloads** for only the tracks you don’t already have.
 - 🎧 **Native pass-through audio downloads** (`.m4a`, `.webm`, etc.) to preserve source quality and reduce storage overhead.
-- 🛡️ **No third-party scraping-site dependency** (e.g., no Y2Mate-style flow); uses a native backend/extraction engine.
+- 🛡️ **No third-party scraping-site dependency** (e.g., no Y2Mate-style flow); stream resolution is handled by a native extraction component in the app architecture.
 - 🌌 **Dark, glassmorphic UI** focused on clarity and modern Android aesthetics.
 
 ## 🛠 Tech Stack
@@ -19,7 +19,7 @@ An open-source **React Native (Expo)** Android utility that helps you leave musi
 - **Expo** + **Expo Router** (navigation and app runtime)
 - **NativeWind / Tailwind CSS** (styling system)
 - **Expo FileSystem** (local file discovery and storage operations)
-- **YouTube Data API** (playlist and metadata integration)
+- **YouTube Data API** (playlist and metadata integration only; not used for audio stream delivery)
 
 ## 🧠 How It Works
 
@@ -28,7 +28,7 @@ The app builds a local index of audio files (name/artist heuristics + metadata w
 Only items not found in the local index are marked as **missing**, preventing duplicate downloads and saving bandwidth.
 
 ### 2) Native Pass-through
-Instead of forcing 320kbps MP3 transcoding, `mewsick` fetches native stream/container formats directly (such as `.m4a` or `.webm`) when available.  
+`mewsick` uses YouTube Data API for playlist/track metadata, then resolves playable audio streams via a native extraction component (not via scraping sites). Instead of forcing 320kbps MP3 transcoding, it fetches native stream/container formats directly (such as `.m4a` or `.webm`) when available.  
 This pass-through approach:
 
 - Preserves source fidelity
