@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "mewsick",
+    "slug": "mewsick",
+    "scheme": "mewsick",
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-web-browser"
+    ],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
